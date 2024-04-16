@@ -129,9 +129,11 @@
         <div class="content has-text-justified">
           <p>
             <!-- write basic discription of wandr and have wandr in bold -->
-            <span class="wandr">WANDR</span> is a model able to generate realistic motion of human avatars that
+            <span class="wandr">WANDR</span> is a conditional Variational AutoEncoder (c-VAE) that generates realistic motion of human avatars that
             navigate towards an arbitrary goal location and reach for it.
-            What makes <span class="wandr">WANDR</span> unique is that the generation process
+            <b>Input</b> to our method is the initial pose of the avatar, the goal location, and the desired motion duration.
+            The <b>output</b> is a sequence of poses that guide the avatar
+             from the initial pose to the goal location and place the wrist on it. 
             
           </p>
         </div>
@@ -145,6 +147,24 @@
       </video>
     </div>
   </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">How is WANDR unique?</h2>
+        <div class="content has-text-justified">
+          <p>
+            <span class="wandr">WANDR</span> is the first human motion generation model that implements an <b>active feedback loop learned purely from data</b>
+            , without any extra steps of reinforcement learning.
+            <!-- bullet points --> 
+            <ul>
+              <li><b>Active closed loop guidance.</b></li>
+              Blah blah blah
+              <li><b>Purely data-driven training.</b></li>
+              Blah blah blah
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
 </section>
 
 
@@ -154,49 +174,37 @@
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-steve">
           <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/steve.mp4"
+            <source src="./static/videos/motion1.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-chair-tp">
           <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chair-tp.mp4"
+            <source src="./static/videos/motion2.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-shiba">
           <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/shiba.mp4"
+            <source src="./static/videos/motion3.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-fullbody">
           <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/fullbody.mp4"
+            <source src="./static/videos/motion4.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-blueshirt">
           <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/blueshirt.mp4"
+            <source src="./static/videos/motion5.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-mask">
           <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
-          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
-          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/toby2.mp4"
+            <source src="./static/videos/motion6.mp4"
                     type="video/mp4">
           </video>
         </div>
