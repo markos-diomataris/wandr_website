@@ -8,34 +8,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WANDR: Intention-guided Human Motion Generation</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script> -->
-
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  <link href="./static/css/google_sans_noto_sans_castoro"
         rel="stylesheet">
-  <!-- <link href="./static/css/google_sans_noto_sans_castoro"
-        rel="stylesheet"> -->
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <!-- <link rel="stylesheet" href="./static/css/fontawesome.all.min.css"> -->
   <link rel="stylesheet"
         href="./static/css/academicons.min.css">
         <!-- href="./static/css/academicons.min.css"> -->
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.svg">
+
+  <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+  <script id="MathJax-script" async src="./static/js/tex-mml-chtml.js"></script>
 
   <script src="./static/js/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -98,7 +86,7 @@
               </span>
               <!-- Video Link. -->
               <span class="link-block">
-                <a href="index.html"
+                <a href="https://youtu.be/9szizM-XUCg?si=B836zQoWTI4I9s61" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <img src="./static/css/video.svg" width="15">
@@ -126,9 +114,8 @@
 </section>
 
 <section>
-
+<!-- 
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
     <div class="columns is-centered has-text-centered text-font">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
@@ -149,7 +136,8 @@
   </div>
   <br>
   <br>
-</section>
+</section> -->
+
 
 <section class="hero teaser text-font">
     <div class="columns is-centered has-text-centered">
@@ -250,6 +238,40 @@
     </div>
   </div>
 </section>
+
+
+
+<section class="hero teaser text-font">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Method</h2>
+      <div class="content has-text-justified">
+        <p>
+        Our method is based on a conditional Variational Auto-Encoder (c-VAE) that learns to model motion as a frame-by-frame generation process by auto-encoding the pose difference between two adjacent frames.
+        The condition signal consists of the human’s current pose and dynamics along with the intention information.
+        Intention is a function of both the current pose and the goal location and therefore actively guides the avatar during the motion generation in a closed loop manner.
+        Through training, the c-VAE learns the distribution of potential subsequent poses conditioned on the current dynamic state of the human and its intention towards a specific goal.
+        We train WANDR using two datasets: <a href="https://amass.is.tue.mpg.de/" target="_blank">AMASS</a>, which captures a wide range of motions including locomotion, and <a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Araujo_CIRCLE_Capture_in_Rich_Contextual_Environments_CVPR_2023_paper.pdf" target="_blank">CIRCLE</a>, which captures reaching motions.
+        During inference, intention features are calculated based on the goal and act as a feedback loop that guides the motion generation towards the goal.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <div class="content has-text-justified">
+          <img src="./images/method.png"
+          class="interpolation-image small-width"
+          alt="method"/>
+          <!-- <figcaption>Caption text goes here</figcaption> -->
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+</section>
+
+
 
 <section class="hero teaser text-font">
     <div class="columns is-centered has-text-centered">

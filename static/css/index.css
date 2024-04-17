@@ -161,6 +161,13 @@ body {
   border-radius: 5px;
 }
 
+.small-width{
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+
+}
+
 .interpolation-video-column {
 }
 
