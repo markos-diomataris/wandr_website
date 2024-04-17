@@ -9,7 +9,7 @@
   <title>WANDR: Intention-guided Human Motion Generation</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
 
@@ -20,7 +20,7 @@
     gtag('js', new Date());
 
     gtag('config', 'G-PYVRSFMDRL');
-  </script>
+  </script> -->
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -122,7 +122,33 @@
   </div>
 </section>
 
-<section class="hero teaser">
+<section>
+
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered text-font">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+          Synthesizing natural human motions that enable a 3D human avatar to walk and reach for arbitrary goals in 3D space remains an unsolved problem with many applications. Existing methods (data-driven or using reinforcement learning) are limited in terms of generalization and motion naturalness.
+          A primary obstacle is the scarcity of training data that combines locomotion with goal reaching.
+          </p>
+          <p>
+          To address this, we introduce WANDR, a data-driven model that takes an avatar’s initial pose and a goal’s 3D position and generates natural human motions that place the end effector (wrist) on the goal location. To solve this, we introduce novel intention features that drive rich goal-oriented movement.
+          </p>
+          <p>
+           Intention guides the agent to the goal, and interactively adapts the generation to novel situations without needing to define sub-goals or the entire motion path. Crucially, intention allows training on datasets that have goal-oriented motions as well as those that do not. WANDR is a conditional Variational Auto-Encoder (c-VAE), which we train using the AMASS and CIRCLE datasets. We evaluate our method extensively and demonstrate its ability to generate natural and long-term motions that reach 3D goals and generalize to unseen goal locations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+</section>
+
+<section class="hero teaser text-font">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">What is WANDR?</h2>
@@ -132,7 +158,7 @@
             <span class="wandr">WANDR</span> is a conditional Variational AutoEncoder (c-VAE) that generates realistic motion of human avatars that
             navigate towards an arbitrary goal location and reach for it.
             <b>Input</b> to our method is the initial pose of the avatar, the goal location, and the desired motion duration.
-            The <b>output</b> is a sequence of poses that guide the avatar
+            <b>Output</b> is a sequence of poses that guide the avatar
              from the initial pose to the goal location and place the wrist on it. 
             
           </p>
@@ -145,6 +171,9 @@
         <source src="./static/videos/branching_motion.mp4"
                 type="video/mp4">
       </video>
+      <h2 class="subtitle has-text-centered small_font">
+       Starting from the same state, WANDR generates diverse motions to reach different goal locations all around the human. 
+      </h2>
     </div>
   </div>
     <div class="columns is-centered has-text-centered">
@@ -152,15 +181,18 @@
         <h2 class="title is-3">How is WANDR unique?</h2>
         <div class="content has-text-justified">
           <p>
-            <span class="wandr">WANDR</span> is the first human motion generation model that implements an <b>active feedback loop learned purely from data</b>
-            , without any extra steps of reinforcement learning.
-            <!-- bullet points --> 
-            <ul>
-              <li><b>Active closed loop guidance.</b></li>
-              Blah blah blah
-              <li><b>Purely data-driven training.</b></li>
-              Blah blah blah
-            </ul>
+            <span class="wandr">WANDR</span> is the first human motion generation model that is driven by an <b>active feedback loop learned purely from data</b>,
+             without any extra steps of reinforcement learning (RL).
+              <div class="is-centered has-text-centered small-header">Active closed loop guidance through <b><span class="int">"intention"</span></b> features.</div>
+               <span class="wandr">WANDR</span>  generates motion autoregressively (frame-by-frame). At each step, it predicts a state-delta that will progress the human to the next state.
+                The prediction of the state-delta is conditioned on time- and goal-dependent features that we call "intention" (visualized as arrows in videos below). 
+                These features are computed at every frame and act as a feedback loop that guides the motion generation to reach the goal. For more details on the intention, please refer to section 3.2 of the paper.
+              <div class="is-centered has-text-centered small-header">Purely data-driven training.</div>
+              Existing datasets that capure motion of humans reaching for goals, like <a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Araujo_CIRCLE_Capture_in_Rich_Contextual_Environments_CVPR_2023_paper.pdf" target="_blank">CIRCLE</a>, are scarce have very small scale to enable generalization.
+              This is why <a href="https://arxiv.org/pdf/2310.04582.pdf" target="_blank">RL</a> is a popular approach to learn similar tasks. However, RL comes with its own set of challenges such as sample complexity.
+              Inspired by the paradigm of behavioral cloning we propose a purely data-driven approach where during training a future position of the avatar's hand is considered as the goal. By halucinating goals this way, we are able to combine
+              both smaller datasets with goal annotations such as <a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Araujo_CIRCLE_Capture_in_Rich_Contextual_Environments_CVPR_2023_paper.pdf" target="_blank">CIRCLE</a>, 
+              as well as large scale like <a href="https://amass.is.tue.mpg.de/" target="_blank">AMASS</a> that have no goal labels but are essential to learning general navigational skills suck as walking, turning etc.
           </p>
         </div>
       </div>
@@ -209,57 +241,75 @@
           </video>
         </div>
       </div>
+      <h2 class="subtitle has-text-centered small_font">
+        Examples of <span class="wandr">WANDR</span> generated motions with different initial poses, goals and durations. Notice how the <span class="int">"intention"</span> features (arrows) <b>actively guide</b> the avatar to reach the goal.
+      </h2>
     </div>
   </div>
 </section>
 
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
+<section class="hero teaser text-font">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+        <h2 class="title is-3">Adapting to dynamic goals without training for it</h2>
         <div class="content has-text-justified">
           <p>
-            We present the first method capable of photorealistically reconstructing a non-rigidly
-            deforming scene using photos/videos captured casually from mobile phones.
-          </p>
-          <p>
-            Our approach augments neural radiance fields
-            (NeRF) by optimizing an
-            additional continuous volumetric deformation field that warps each observed point into a
-            canonical 5D NeRF.
-            We observe that these NeRF-like deformation fields are prone to local minima, and
-            propose a coarse-to-fine optimization method for coordinate-based models that allows for
-            more robust optimization.
-            By adapting principles from geometry processing and physical simulation to NeRF-like
-            models, we propose an elastic regularization of the deformation field that further
-            improves robustness.
-          </p>
-          <p>
-            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
-            photos/videos into deformable NeRF
-            models that allow for photorealistic renderings of the subject from arbitrary
-            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
-            using a
-            rig with two mobile phones that take time-synchronized photos, yielding train/validation
-            images of the same pose at different viewpoints. We show that our method faithfully
-            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
-            fidelity.
+          Since <span class="wandr">WANDR</span> generates motion autoregressively, the intention features are updated at every frame. This allows the model to adapt to goals that move and change over time.
+            Observe in the videos below how the intention features actively guide the avatar to orient its self towars the goal (orange arrow), get close to it (red arrow) and reach for it (blue arrow).
           </p>
         </div>
       </div>
     </div>
-    <!--/ Abstract. -->
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/moving_goal1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/multiple_goals4.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/moving_goal2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/multiple_goals3.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/moving_goal5.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <h2 class="subtitle has-text-centered small_font">
+        <span class="wandr">WANDR</span> generates motion autoregressively. This allows it to adapt to goals that move and change over time even though it has never been trained on scenarios with dynamic goals. 
+      </h2>
+    </div>
+  </div>
+</section>
 
+<section class="section text-font">
+  <div class="container is-max-desktop">
     <!-- Paper video. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Video</h2>
         <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/9szizM-XUCg?si=G7HDNmDWJRAAI0Ze" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<!--  https://www.youtube.com/watch?v=9szizM-XUCg -->
         </div>
       </div>
     </div>
@@ -268,187 +318,50 @@
 </section>
 
 
-<section class="section">
-  <div class="container is-max-desktop">
-
-    <div class="columns is-centered">
-
-      <!-- Visual Effects. -->
-      <div class="column">
-        <div class="content">
-          <h2 class="title is-3">Visual Effects</h2>
-          <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
-          </p>
-          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dollyzoom-stacked.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-      <!--/ Visual Effects. -->
-
-      <!-- Matting. -->
-      <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
-            <video id="matting-video" controls playsinline height="100%">
-              <source src="./static/videos/matting.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <!--/ Matting. -->
-
-    <!-- Animation. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Animation</h2>
-
-        <!-- Interpolating. -->
-        <h3 class="title is-4">Interpolating states</h3>
-        <div class="content has-text-justified">
-          <p>
-            We can also animate the scene by interpolating the deformation latent codes of two input
-            frames. Use the slider here to linearly interpolate between the left frame and the right
-            frame.
-          </p>
-        </div>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_start.jpg"
-                 class="interpolation-image"
-                 alt="Interpolate start reference image."/>
-            <p>Start Frame</p>
-          </div>
-          <div class="column interpolation-video-column">
-            <div id="interpolation-image-wrapper">
-              Loading...
-            </div>
-            <input class="slider is-fullwidth is-large is-info"
-                   id="interpolation-slider"
-                   step="1" min="0" max="100" value="0" type="range">
-          </div>
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_end.jpg"
-                 class="interpolation-image"
-                 alt="Interpolation end reference image."/>
-            <p class="is-bold">End Frame</p>
-          </div>
-        </div>
-        <br/>
-        <!--/ Interpolating. -->
-
-        <!-- Re-rendering. -->
-        <h3 class="title is-4">Re-rendering the input video</h3>
-        <div class="content has-text-justified">
-          <p>
-            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
-            viewpoint such as a stabilized camera by playing back the training deformations.
-          </p>
-        </div>
-        <div class="content has-text-centered">
-          <video id="replay-video"
-                 controls
-                 muted
-                 preload
-                 playsinline
-                 width="75%">
-            <source src="./static/videos/replay.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <!--/ Re-rendering. -->
-
-      </div>
-    </div>
-    <!--/ Animation. -->
-
-
-    <!-- Concurrent Work. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Related Links</h2>
-
-        <div class="content has-text-justified">
-          <p>
-            There's a lot of excellent work that was introduced around the same time as ours.
-          </p>
-          <p>
-            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
-          </p>
-          <p>
-            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
-            both use deformation fields to model non-rigid scenes.
-          </p>
-          <p>
-            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
-          </p>
-          <p>
-            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Concurrent Work. -->
-
-  </div>
-</section>
-
-
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+    <pre><code>@inproceedings{diomataris2024wandr,
+  title = {{WANDR}: Intention-guided Human Motion Generation},
+  author = {Diomataris, Markos and Athanasiou, Nikos and Taheri, Omid and Wang, Xi and Hilliges, Otmar and Black, Michael J.},
+  booktitle = CVPR,
+  year = {2024},
 }</code></pre>
   </div>
 </section>
 
 
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-</body>
+    
+        
+        <footer class="footer">
+            <div class="container">
+                <div class="content has-text-centered">
+                    <a class="icon-link"
+                        href="">
+                    <i class="fas fa-file-pdf"></i>
+                    </a>
+                    <a class="icon-link" href="https://github.com/markos-diomataris" class="external-link" disabled>
+                    <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <div class="columns is-centered">
+                    <div class="column is-8">
+                        <div class="content">
+                            <!-- <p>
+                                This website is licensed under a <a rel="license"
+                                    href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                                Commons Attribution-ShareAlike 4.0 International License</a>.
+                            </p> -->
+                            <p>
+                            This webpage is built with the template from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>. We sincerely thank <a href="https://keunhong.com/">Keunhong Park</a> for developing and open-sourcing this template.
+                            </p>
+							<p>
+							<small>© 2024 Max-Planck-Gesellschaft <small class="text-muted ml-1 mr-1">-</small><a href="imprint.html">Imprint</a><small class="text-muted ml-1 mr-1">-</small><a href="privacy-policy.html">Privacy Policy</a><small class="text-muted ml-1 mr-1">-</small><a href="license.html">License</a></small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
 </html>

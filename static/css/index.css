@@ -18,7 +18,13 @@ body {
 }
 .wandr {
   font-variant: small-caps;
-  font-weight: bold;
+  /* font-weight: bold; */
+}
+
+.int {
+  /* font-variant: small-caps; */
+  font-style: italic;
+  /* font-weight: bold; */
 }
 
 
@@ -29,6 +35,19 @@ body {
 
 .teaser {
   font-family: 'Google Sans', sans-serif;
+}
+
+.text-font {
+  font-size: 20px; /* Adjust the size as needed */
+}
+
+.small-header {
+  font-size: 22px; /* Adjust the size as needed */
+  text-decoration: underline;
+}
+
+.caption{
+  font-size: 1.0rem;
 }
 
 
@@ -111,8 +130,8 @@ body {
     height: 100%;
 }
 
-.publication-body img {
-}
+/* .publication-body img {
+} */
 
 .results-carousel {
   overflow: hidden;
